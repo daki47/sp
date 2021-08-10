@@ -1,0 +1,182 @@
+/**A positive integer N (N<=100) and an array a[] with N positive integer are read from standard input.
+
+Write a function int par(a, n) that will return the smallest element of the array that appears an even number of times in the array. If there is no such element, the function should return 0.
+
+Write a program that will call the function par for the numbers entered in the array a[] and will print the smallest number that appears an even number of times in the array a[].
+
+Example 1.
+Input
+12 // N, number of elements in the array a
+1 3 4 5 3 2 4 5 5 3 2 3 // the elements of the array
+Output
+The smallest element that appears an even number of times is 2 // here the function par returns the value 2 and this message is printed.
+
+
+Example 2.
+Input
+12 // N, number of elements
+7 3 4 5 3 8 4 5 5 3 2 6 // elements
+Output
+No elements appear an even number of times! // here the function is returning value 0, so this message is printed.*/
+
+///sosht e sakt
+
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+int par(int a[],int n)
+{
+    int k=12345678;
+    int i,j;
+    for(i=0;i<n-1;i++)
+    {
+        int count=0;
+        for(j=i+1;j<n;j++)
+        {
+            if(a[i]==a[j])
+            {
+                if(count==0)
+                count++;///QETU NI COUNT MA PAK
+                count++;
+
+            }
+        }
+            if(count%2==0 && count!=0)
+            {
+                if(a[i]<k)
+                k=a[i];
+            }
+
+    }
+    if(k==12345678)
+        return 0;
+        else
+        return k;
+}
+
+int main()
+{
+    int i,n;
+    scanf("%d",&n);
+    int array[n];
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&array[i]);
+    }
+
+    if(par(array,n)==0)
+    printf("No elements appear an even number of times!");
+   else
+    printf("The smallest element that appears an even number of times is %d",par(array,n));
+
+    return 0;
+
+}
+*/
+///E JEMJA E PA SAKTA AMO E NDREQMJA - DIQKA DIQKA
+
+#include <stdio.h>
+#include <string.h>
+
+void wtf(){
+    FILE *f=fopen("input.txt","w");
+
+    int n,i,j;
+    char el;
+    scanf("%d", &n);
+
+    fprintf(f,"%d\n",n);
+    char a = getchar();
+
+    for (i=0; i < n; ++i){
+        for (j=0; j < n; ++j){
+            el = getchar();
+            getchar();
+            fprintf(f, "%c  ", el);
+        }
+        fputc('\n',f);
+    }
+    fclose(f);
+
+    return;
+}
+
+int main(){
+    wtf();
+    // Your code starts here!
+   FILE *fp=fopen("input.txt","r");
+   int n;
+   fscanf(fp,"%d\n",&n); /// '\n' te %d- PA SAKT
+    char A[n][n];
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++)
+        {
+            fscanf(fp,"%c ",&A[i][j]);/// space MAS %C - PA SAKT
+        }
+    }
+    char word[11];
+    scanf("%s",word);
+    int flag=0,flag1=0;
+    int ax,ay,ex,ey;
+    int ax1,ay1,ex1,ey1;
+    int i,j;
+    for(i=0;i<n;i++)
+    {
+        int count=0,count1=0;
+        if(flag1==1 ||flag==1)
+            break;
+    for( j=0;j<n;j++)
+    {
+        if(A[i][j]==word[count])
+        {
+       if(count==0)
+       {
+          ax=i;
+        ay=j;
+       }
+       count++;
+       }
+       if(A[j][i]==word[count1])
+       {
+           if(count1==0)
+           {
+            ax1=i;
+           ay1=j;
+           }
+           count1++;
+       }
+
+
+       if(count==strlen(word))
+       {
+           flag=1;
+           count=0;
+           ex=i;
+           ey=j;
+           break;
+       }
+       if(count1==strlen(word))
+       {
+           flag1=1;
+           count=0;
+           ex1=i;
+           ey1=j;
+           break;
+       }
+    }
+     }
+    if(flag==0 && flag1==0)
+        printf("Not found");
+    else if(flag==1)
+    printf("%d, %d -> %d, %d",ax,ay,ex,ey);
+    else
+    printf("%d, %d -> %d, %d",ay1,ax1,ey1,ex1);
+
+
+   fclose(fp);
+
+
+    // Your code ends here!
+    return 0;
+}
